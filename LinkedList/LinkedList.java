@@ -19,10 +19,10 @@ public class LinkedList {
         head = newNode;
     }
 
-    static void insertAtLast(int newData) {
-        Node newNode = new Node(newData);
+    static void insertAtLast(int data) {
+        Node newNode = new Node(data);
         if (head == null) {
-            head = new Node(newData);
+            head = new Node(data);
             return;
         }
         newNode.next = null;
@@ -33,6 +33,32 @@ public class LinkedList {
         }
         last.next = newNode;
 
+    }
+
+    static void insertAtPosition(int data, int k) {
+        Node newNode = new Node(data);
+
+        if (k == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        Node current = head;
+        int count = 0;
+
+        while(current != null && count < (k - 1)) {
+            current = current.next;
+            count++;
+        }
+
+        if (current == null) {
+            System.out.println("k is greater then length of the list");
+            return;
+        }
+
+        newNode.next = current.next;
+        current.next = newNode;
     }
 
     static String printList() {
