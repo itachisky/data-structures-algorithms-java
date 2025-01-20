@@ -27,10 +27,27 @@ public class SingleLinkedList {
         }
     }
 
+    public void reverse() {
+        Node temp = head;
+        Node prev = null;
+        Node front;
+
+        while (temp != null) {
+            front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
+        }
+
+        head = prev;
+    }
+
     public static void main(String[] args) {
         SingleLinkedList list = new SingleLinkedList();
         list.setHead(HelperMethods.createLinkedList());
 
+        HelperMethods.printLinkedList(list.getHead());
+        list.reverse();
         HelperMethods.printLinkedList(list.getHead());
     }
 }
