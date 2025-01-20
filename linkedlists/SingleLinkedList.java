@@ -14,7 +14,17 @@ public class SingleLinkedList {
         this.head = head;
     }
 
-    public void add(int value) {
+    public void insertAtFirst(int value) {
+        Node newNode = new Node(value);
+        if (head == null) {
+            head = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
+    public void insertAtLast(int value) {
         Node newNode = new Node(value);
         if (head == null) {
             head = newNode;
@@ -25,6 +35,37 @@ public class SingleLinkedList {
             }
             current.next = newNode;
         }
+    }
+
+    public void insertAtPosition(int value, int position) {
+        int length = this.length(head);
+
+        if ((length == 0 && position != 0) || position > length) {
+            System.out.println("Invalid Operation");
+        } else {
+            Node current = head;
+            Node newNode = new Node(value);
+            int temp = 1;
+            while (temp < position - 1) { 
+                current = current.next;
+                temp += 1;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    public int length(Node head) {
+        int listLength = 0;
+        if (head == null) {
+            return 0;
+        } else {
+            while (head != null) { 
+                listLength += 1;
+                head = head.next;
+            }
+        }
+        return listLength;
     }
 
     public void reverse() {
@@ -47,7 +88,18 @@ public class SingleLinkedList {
         list.setHead(HelperMethods.createLinkedList());
 
         HelperMethods.printLinkedList(list.getHead());
-        list.reverse();
+        list.insertAtLast(4);
         HelperMethods.printLinkedList(list.getHead());
+
+        HelperMethods.printLinkedList(list.getHead());
+        list.insertAtFirst(0);
+        HelperMethods.printLinkedList(list.getHead());
+
+        HelperMethods.printLinkedList(list.getHead());
+        list.insertAtPosition(2, 3);
+        HelperMethods.printLinkedList(list.getHead());
+
+        int length = list.length(list.getHead());
+        System.out.println("Length of the List is: " + length);
     }
 }
