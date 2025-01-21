@@ -55,6 +55,53 @@ public class SingleLinkedList {
         }
     }
 
+    public void deleteAtLast() {
+        if (head == null) {
+            System.out.println("Invalid Operation");
+        } else {
+            Node current = head;
+            while ( current.next.next != null ) {
+                current = current.next;
+            }
+            current.next = null;
+        }
+    }
+
+    public void deleteAtFirst() {
+        if (head == null) {
+            System.out.println("Invalid Operation");
+        } else {
+            // This works fine because there's no reference to old Head,
+            // So it would be garbage collected now.
+            head = head.next;
+        }   
+    }
+
+    public void deleteAtPosition(int position) {
+        if (head == null) {
+            System.out.println("Invalid Operation");
+        }
+    
+        if (position == 0) {
+            // Special case: deleting the first node
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        int count = 1;
+
+        while (current != null && count < position - 1) {
+            current = current.next;
+            count++;
+        }
+        
+        if (current == null || current.next == null) {
+            throw new IllegalArgumentException("Position out of bounds");
+        }
+        current.next = current.next.next;
+    }
+
     public int length(Node head) {
         int listLength = 0;
         if (head == null) {
@@ -96,7 +143,15 @@ public class SingleLinkedList {
         HelperMethods.printLinkedList(list.getHead());
 
         HelperMethods.printLinkedList(list.getHead());
-        list.insertAtPosition(2, 3);
+        list.deleteAtFirst();
+        HelperMethods.printLinkedList(list.getHead());
+
+        HelperMethods.printLinkedList(list.getHead());
+        list.deleteAtLast();
+        HelperMethods.printLinkedList(list.getHead());
+
+        HelperMethods.printLinkedList(list.getHead());
+        list.deleteAtPosition(3);
         HelperMethods.printLinkedList(list.getHead());
 
         int length = list.length(list.getHead());
