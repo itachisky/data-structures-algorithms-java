@@ -130,6 +130,19 @@ public class SingleLinkedList {
         head = prev;
     }
 
+    public int search(int value) {
+        Node current = head;
+        int position = 1;
+        while (current != null) { 
+            if (current.val == value) {
+                return position;
+            }
+            current = current.next;
+            position++;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         SingleLinkedList list = new SingleLinkedList();
         list.setHead(HelperMethods.createLinkedList());
@@ -153,6 +166,9 @@ public class SingleLinkedList {
         HelperMethods.printLinkedList(list.getHead());
         list.deleteAtPosition(3);
         HelperMethods.printLinkedList(list.getHead());
+
+        int postion = list.search(5);
+        System.out.println("Postion of the item is: " + postion);
 
         int length = list.length(list.getHead());
         System.out.println("Length of the List is: " + length);
